@@ -1,0 +1,5 @@
+{
+    "[typescript]": {
+        "files.trimTrailingWhitespace": true
+    }
+}
