@@ -1,41 +1,41 @@
 import { Before, After, setDefaultTimeout } from '@cucumber/cucumber';
-import { chromium} from 'playwright';
+import { browserConfig } from '../config/browser-config';
+import { environment } from '../config/environment';
 import { CustomWorld} from '../fixtures/custom-fixtures';
-
-import { LoginPage} from '../pages/LoginPage';
-import { InventoryPage} from '../pages/InventoryPage';
-
-import { ProductDetailsPage } from '../pages/ProductDetailsPage';
-import { CartPage } from '../pages/CartPage';
-import { Header } from '../components/Header';
-import { CheckoutPage } from '../pages/CheckoutPage';
 import { Logger } from '../utils/Logger';
+import { PageFactory } from '../pages/PageFactory';
 setDefaultTimeout(30000);
 
 Before(async function (this: CustomWorld){
     Logger.info('Starting browser and test scenario');
+const browserType = browserConfig[environment.browser];
 
+if (!browserType) {
+    throw new Error(
+        `Unsupported browser: ${environment.browser}`
+    );
+}
 
-this.browser = await chromium.launch({
-
+this.browser = await browserType.launch({
     headless: false
-})
+});
 this.context = await this.browser.newContext();
 this.page = await this.context.newPage();
-this.loginPage = new LoginPage(this.page);
-this.inventoryPage = new InventoryPage(this.page);
-this.productDetailsPage = new ProductDetailsPage(this.page);
-this.cartPage = new CartPage(this.page);
-this.header = new Header(this.page);
-this.checkoutPage = new CheckoutPage(this.page);
+const pageFactory = new PageFactory(this.page);
 
-
+this.loginPage = pageFactory.createLoginPage();
+this.inventoryPage = pageFactory.createInventoryPage();
+this.productDetailsPage = pageFactory.createProductDetailsPage();
+this.cartPage = pageFactory.createCartPage();
+this.header = pageFactory.createHeader();
+this.checkoutPage = pageFactory.createCheckoutPage();
 });
 
 After(async function (this: CustomWorld, scenario){
 
     if (scenario.result?.status === 'FAILED') {
         Logger.error(`Scenario failed: ${scenario.pickle.name}`);
+    if (this.page) {
         const screenshot = await this.page.screenshot();
 
         await this.attach(
@@ -43,11 +43,10 @@ After(async function (this: CustomWorld, scenario){
         'image/png'
 );
     }
-
+    }
     if (scenario.result?.status === 'PASSED') {
     Logger.info(`Scenario passed: ${scenario.pickle.name}`);
 }
-
    if(this.context)
 
    {
@@ -57,5 +56,4 @@ After(async function (this: CustomWorld, scenario){
    {
     await this.browser.close();
    }
-
 });

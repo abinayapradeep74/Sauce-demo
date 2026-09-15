@@ -4,4 +4,5 @@ export interface EnvironmentConfig {
     testUserPassword: string;
     invalidUserUsername: string;
     invalidUserPassword: string;
+    browser: string;
 }
