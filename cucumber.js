@@ -8,6 +8,7 @@ module.exports = {
             'html:reports/cucumber-report.html'
         ],
     publishQuiet: true,
-timeout: 30000
+timeout: 30000,
+    retry: 1
   }
 };
