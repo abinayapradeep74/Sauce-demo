@@ -21,6 +21,16 @@ When('I enter valid customer credentials',
 
 });
 
+When('I enter invalid customer credentials', async function (this: CustomWorld) {
+    await this.loginPage.enterUsername(
+        environment.invalidUserUsername
+    );
+
+    await this.loginPage.enterPassword(
+        environment.invalidUserPassword
+    );
+});
+
 When('I click the login button', async function (this: CustomWorld){
 
 await this.loginPage.clickLogin();
@@ -30,4 +40,8 @@ await this.loginPage.clickLogin();
 Then('I should be successfully logged in', async function (this: CustomWorld){
 
     await this.inventoryPage.verifyInventoryPage();
+});
+Then('I should see the login error message', async function (this: CustomWorld){
+await this.loginPage.verifyLoginError();
+
 });

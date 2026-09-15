@@ -26,4 +26,14 @@ async selectProduct(productName: string): Promise<void> {
         .click();
 }
 
+async addProductToCart(productName: string): Promise<void> {
+    const product = this.page
+        .locator('[data-test="inventory-item"]')
+        .filter({ hasText: productName });
+
+    await product
+        .locator('[data-test^="add-to-cart-"]')
+        .click();
+}
+
 }

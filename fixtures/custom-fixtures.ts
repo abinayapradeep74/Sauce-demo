@@ -6,7 +6,7 @@ import { InventoryPage} from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { ProductDetailsPage} from '../pages/ProductDetailsPage';
 import { Header } from '../components/Header';
-
+import { CheckoutPage } from '../pages/CheckoutPage';
 export class CustomWorld extends World {
 
   browser!: Browser;
@@ -18,6 +18,7 @@ export class CustomWorld extends World {
   productDetailsPage!: ProductDetailsPage;
   cartPage!: CartPage;
   header!: Header;
+  checkoutPage!: CheckoutPage;
 
   constructor(options: IWorldOptions) {
     super(options);
