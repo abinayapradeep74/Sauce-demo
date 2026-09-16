@@ -2,6 +2,14 @@ pipeline {
 
     agent any
 
+    parameters {
+        choice(
+            name: 'BROWSER',
+            choices: ['chromium', 'firefox', 'webkit'],
+            description: 'Select the browser to run the tests'
+        )
+    }
+
     environment {
         BASE_URL = 'https://www.saucedemo.com'
         BROWSER = 'chromium'
@@ -13,11 +21,13 @@ pipeline {
                 bat 'npm ci'
             }
         }
+
         stage('Install Playwright Browsers') {
             steps {
                 bat 'npx playwright install chromium'
             }
         }
+
         stage('Run Tests') {
             steps {
                 withCredentials([
@@ -36,7 +46,5 @@ pipeline {
                 }
             }
         }
-
     }
-
 }
