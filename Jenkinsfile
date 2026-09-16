@@ -8,13 +8,16 @@ pipeline {
     }
 
     stages {
-
         stage('Install Dependencies') {
             steps {
                 bat 'npm ci'
             }
         }
-
+        stage('Install Playwright Browsers') {
+            steps {
+                bat 'npx playwright install chromium'
+            }
+        }
         stage('Run Tests') {
             steps {
                 withCredentials([
