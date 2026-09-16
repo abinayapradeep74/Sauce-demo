@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         BASE_URL = 'https://www.saucedemo.com'
-        BROWSER = 'chromium'
+        BROWSER = "${params.BROWSER}"
     }
 
     stages {
