@@ -10,6 +10,12 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm ci'
+            }
+        }
+
     }
 
 }
