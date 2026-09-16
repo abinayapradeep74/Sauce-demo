@@ -17,7 +17,7 @@ if (!browserType) {
 }
 
 this.browser = await browserType.launch({
-    headless: false
+    headless: process.env.CI === 'true'
 });
 this.context = await this.browser.newContext();
 this.page = await this.context.newPage();
