@@ -52,5 +52,16 @@ pipeline {
                 archiveArtifacts artifacts: 'reports/cucumber-report.html', fingerprint: true
             }
         }
+        stage('Publish Test Report') {
+            steps {
+                publishHTML(target: [
+                    reportDir: 'reports',
+                    reportFiles: 'cucumber-report.html',
+                    reportName: 'Cucumber Test Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true
+                ])
+            }
+        }
     }
 }
