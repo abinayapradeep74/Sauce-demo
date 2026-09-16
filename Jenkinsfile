@@ -47,5 +47,10 @@ pipeline {
                 }
             }
         }
+        stage('Archive Test Report') {
+            steps {
+                archiveArtifacts artifacts: 'reports/cucumber-report.html', fingerprint: true
+            }
+        }
     }
 }
