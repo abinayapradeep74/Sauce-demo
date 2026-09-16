@@ -12,3 +12,4 @@ export class Logger {
         console.warn(`[WARN] ${message}`);
     }
 }
+// Webhook trigger test
