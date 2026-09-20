@@ -47,6 +47,11 @@ pipeline {
                 }
             }
         }
+        stage('Generate Allure Report') {
+            steps {
+                bat 'npx allure generate allure-results -o allure-report'
+            }
+        }
         stage('Archive Test Report') {
             steps {
                 archiveArtifacts artifacts: 'reports/cucumber-report.html', fingerprint: true
