@@ -8,6 +8,11 @@ pipeline {
             choices: ['chromium', 'firefox', 'webkit'],
             description: 'Select the browser to run the tests'
         )
+        choice(
+            name: 'TEST_SUITE',
+            choices: ['all', 'smoke', 'regression', 'sanity'],
+            description: 'Select the test suite to run'
+        )
     }
 
     environment {
