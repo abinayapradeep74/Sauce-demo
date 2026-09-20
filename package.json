@@ -17,6 +17,8 @@
     "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.4.1",
+    "allure": "^3.17.0",
+    "allure-cucumberjs": "^3.12.2",
     "playwright": "^1.63.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

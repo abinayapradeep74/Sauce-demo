@@ -5,7 +5,8 @@ module.exports = {
     require: ['step-definitions/**/*.ts', 'hooks/**/*.ts'],
     format: [
             'progress',
-            'html:reports/cucumber-report.html'
+            'html:reports/cucumber-report.html',
+            'allure-cucumberjs/reporter'
         ],
     publishQuiet: true,
 timeout: 30000,
