@@ -48,12 +48,15 @@ pipeline {
                         passwordVariable: 'INVALID_USER_PASSWORD'
                     )
                 ]) {
-                    bat '''
-                        if "%TEST_SUITE%"=="all" npm test
-                        if "%TEST_SUITE%"=="smoke" npm run test:smoke
-                        if "%TEST_SUITE%"=="regression" npm run test:regression
-                        if "%TEST_SUITE%"=="sanity" npm run test:sanity
-                    '''
+                    catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+
+                        bat '''
+                            if "%TEST_SUITE%"=="all" npm test
+                            if "%TEST_SUITE%"=="smoke" npm run test:smoke
+                            if "%TEST_SUITE%"=="regression" npm run test:regression
+                            if "%TEST_SUITE%"=="sanity" npm run test:sanity
+                        '''
+                    }
                 }
             }
         }
