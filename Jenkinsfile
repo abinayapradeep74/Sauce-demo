@@ -48,7 +48,12 @@ pipeline {
                         passwordVariable: 'INVALID_USER_PASSWORD'
                     )
                 ]) {
-                    bat 'npm test'
+                    bat '''
+                        if "%TEST_SUITE%"=="all" npm test
+                        if "%TEST_SUITE%"=="smoke" npm run test:smoke
+                        if "%TEST_SUITE%"=="regression" npm run test:regression
+                        if "%TEST_SUITE%"=="sanity" npm run test:sanity
+                    '''
                 }
             }
         }

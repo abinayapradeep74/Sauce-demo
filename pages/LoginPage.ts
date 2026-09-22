@@ -35,7 +35,7 @@ async verifyLoginPage(): Promise<void> {
     await expect(this.usernameInput).toBeVisible();
 
 }
-//verify jenkins trigger
+
 async verifyLoginError(): Promise<void> {
      Logger.info('Verifying invalid login error message');
     await expect(this.loginError).toHaveText(
